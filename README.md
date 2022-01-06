@@ -25,10 +25,10 @@
 ## 使用指南
 
 ### 准备工作
-
-1. 安装python和Selenium包
+1. 下载本仓库的py文件到你的电脑上
+2. 安装python和所需模块
     还是想重申，本项目仅作学习交流使用，故这一块就不介绍了，自行百度吧，本脚本需要Selenium,time模块，如果需要微信推送，则还需要requests模块。
-2. edge驱动安装
+3. edge驱动安装
 
     > [Microsoft Edge Driver - Microsoft Edge Developer](https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/)
     >
@@ -36,7 +36,7 @@
     >
     > 然后放到本程序同一文件夹下
     >
-3. Pushplus推送相关
+4. Pushplus推送相关
 
     > 我感觉这是最简单的推送方式了，还不要钱
     >
