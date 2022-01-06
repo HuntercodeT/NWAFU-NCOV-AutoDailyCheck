@@ -34,7 +34,7 @@ def daka(path,usernumber,pwd):
     location.click()
     time.sleep(5)
 
-    # 模拟滑动 感觉可有可无
+    # 模拟滑动页面 感觉可有可无
     js='document.documentElement.scrollTop=100000'
     browser.execute_script(js)
     time.sleep(5)
@@ -43,27 +43,21 @@ def daka(path,usernumber,pwd):
     submit.click()
     time.sleep(5)
     try:
-        # 获取确认提交信息按钮并点击
-        enter = browser.find_element_by_xpath('//div[@class="wapcf-btn wapcf-btn-ok"]')
-        enter.click()
-        time.sleep(3)
-        tishi = browser.find_element_by_xpath('//div[@class="wapat-title"]').text
-    except :
-        sure = browser.find_element_by_xpath('//div[@class="wapat-btn wapat-btn-ok"]')
-        sure.click()
-        time.sleep(3)
-        tishi = '重复提交'
+        try:
+            # 获取确认提交信息按钮并点击
+            enter = browser.find_element_by_xpath('//div[@class="wapcf-btn wapcf-btn-ok"]')
+            enter.click()
+            time.sleep(3)
+            tishi = browser.find_element_by_xpath('//div[@class="wapat-title"]').text
+            message = '签到成功'
+        except :
+            sure = browser.find_element_by_xpath('//div[@class="wapat-btn wapat-btn-ok"]')
+            sure.click()
+            time.sleep(3)
+            message = '你已签到过，请勿重复提交'
+    except Exception as e:
+        message = '打卡错误\n' + '错误提示为：' + str(e)
     browser.close()
-    return tishi
-
-def check(tishi):
-    '''检查是否签到成功，通过检测点击提交按钮是否有提交信息成功的弹窗'''
-    if tishi == '提交信息成功':
-        message = "签到成功"
-    elif tishi == '重复提交':
-        message = '你已签到过，请勿重复提交'
-    else:
-        message = '签到失败，请查看并手动签到'
     return message
 
 def push(token,message):
@@ -82,8 +76,7 @@ if __name__ == '__main__':
     pwd = 'abcd4561'                                            #密码
     token = 'dsa24533455245321ds2asd4f5a2sa2d'                  #pushplus的token，没有可不填
     path = 'F:\PYTHON\msedgedriver.exe'                         #浏览器驱动存放路径，填到.exe文件本身
-    tishi = daka(path,usernumber,pwd)
-    message = check(tishi)
+    message = daka(path,usernumber,pwd)
     if len(token) != 0:
         push(token,message)
     else:print(message)
